@@ -25,3 +25,55 @@ Array.from(navbar.children[0].children).forEach(element => {
         }
     }
 });
+
+var previous_btn = document.getElementById("previous-btn");
+var next_btn = document.getElementById("next-btn");
+var img_container = document.getElementById("img-container");
+var slider_container = document.getElementById("bar-slider");
+var current_page = 1;
+
+img_container.children.item(current_page - 1).style.opacity = "1";
+slider_container.children.item(current_page - 1).style.opacity = "1";
+previous_btn.onclick = () => {
+    if (current_page > 1) {
+        img_container.children.item(current_page - 1).style.opacity = "0";
+        slider_container.children.item(current_page - 1).style.opacity = "0.5";
+        current_page--;
+        img_container.children.item(current_page - 1).style.opacity = "1";
+        slider_container.children.item(current_page - 1).style.opacity = "1";
+    } else {
+        img_container.children.item(current_page - 1).style.opacity = "0";
+        slider_container.children.item(current_page - 1).style.opacity = "0.5";
+        current_page = img_container.children.length;
+        img_container.children.item(current_page - 1).style.opacity = "1";
+        slider_container.children.item(current_page - 1).style.opacity = "1";
+    }
+};
+
+next_btn.onclick = () => {
+    if (current_page < img_container.children.length) {
+        img_container.children.item(current_page - 1).style.opacity = "0";
+        slider_container.children.item(current_page - 1).style.opacity = "0.5";
+        current_page++;
+        img_container.children.item(current_page - 1).style.opacity = "1";
+        slider_container.children.item(current_page - 1).style.opacity = "1";
+    } else {
+        img_container.children.item(current_page - 1).style.opacity = "0";
+        slider_container.children.item(current_page - 1).style.opacity = "0.5";
+        current_page = 1;
+        img_container.children.item(current_page - 1).style.opacity = "1";
+        slider_container.children.item(current_page - 1).style.opacity = "1";
+    }
+};
+
+Array.from(slider_container.children).forEach(element => {
+    element.onclick = () => {
+        if (current_page != Array.from(slider_container.children).indexOf(element) + 1) {
+            img_container.children.item(current_page - 1).style.opacity = "0";
+            slider_container.children.item(current_page - 1).style.opacity = "0.5";
+            current_page = Array.from(slider_container.children).indexOf(element) + 1;
+            img_container.children.item(current_page - 1).style.opacity = "1";
+            slider_container.children.item(current_page - 1).style.opacity = "1";
+        }
+    }
+});
